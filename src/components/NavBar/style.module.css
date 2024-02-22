@@ -1,0 +1,221 @@
+/* .navbar * {
+    border: 1px solid black;
+} */
+
+.navbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 50px;
+    z-index: 3;
+    background-color: none;
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+
+
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-left: 100px;
+    padding-right: 100px;
+
+    z-index: 1;
+}
+
+.logo {
+    width: 150px;
+}
+
+.menu_links {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.menu_links li {
+    width: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Jost;
+    font-size: 1rem;
+    font-weight: 400;
+    text-wrap: nowrap;
+
+    color: #000000;
+    cursor: pointer;
+}
+
+.menu_links li[current-page] {
+    color: #F75023;
+}
+
+.menu_links li .bottom_line {
+    display: block;
+    height: 2px;
+    width: 0px;
+    background-color: #F75023;
+
+    transition: width .2s;
+}
+
+.menu_links li[current-page] .bottom_line,
+.menu_links li:hover .bottom_line {
+    width: 100%;
+    transition: width .2s;
+}
+
+.menu_links li label {
+    cursor: pointer;
+}
+
+.contact_cta {
+    padding: 5px 30px;
+    border-radius: 50px;
+    border: 2px solid #F75023;
+    color: #8067F0;
+    font-weight: bold;
+    font-size: .88rem;
+}
+
+
+
+
+/************ Hamburger menu section start **********/
+.hamburger_menu_container {
+    position: relative;
+    width: min-content;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    height: 28px;
+    -webkit-user-select: none;
+    user-select: none;
+
+    z-index: 2;
+
+    display: none;
+    /* display: flex; Screensize 800px or lower */
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.menu_toggler {
+    opacity: 0;
+    /* hide checkbox input */
+    z-index: 3;
+    /* and place it over the hamburger */
+
+    margin: 0;
+    padding: 0;
+
+    position: absolute;
+    display: block;
+    top: -1px;
+    left: -3px;
+    right: -4px;
+    bottom: -3px;
+
+    cursor: pointer;
+
+    -webkit-touch-callout: none;
+}
+
+
+/************************
+* Build hamburger
+************************/
+.hamburger_line {
+    display: block;
+    width: 30px;
+    height: 3px;
+    /* margin-bottom: 5px; */
+    position: relative;
+
+    background: #000000;
+    border-radius: 3px;
+
+    z-index: 2;
+
+    transform-origin: 4px 0px;
+
+    transition: transform 0.15s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        width 0.15s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        background 0.15s cubic-bezier(0.77, 0.2, 0.05, 1.0),
+        opacity 0.20s ease;
+}
+
+/************************
+* Hamburger end
+************************/
+
+
+
+/**********************************************
+* Animate teh hamburger lines into a crossmark
+**********************************************/
+.menu_toggler:checked~.top_line {
+    transform: rotate(43deg) translate(2px, 0px);
+    width: calc(100% + 20%);
+}
+
+.menu_toggler:checked~.middle_line {
+    opacity: 0;
+}
+
+.menu_toggler:checked~.bottom_line {
+    transform: rotate(-43deg) translate(-2px, 0px);
+    width: calc(100% + 20%);
+}
+
+/**********************************************
+* Lines into crossmark animation end
+**********************************************/
+
+/************ Hamburger menu section end ************/
+
+
+
+
+@media (max-width: 800px) {
+    .navbar {
+        /* background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 83%, rgba(255, 255, 255, 0) 100%); */
+        background: #ffffff;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hamburger_menu_container {
+        display: flex;
+    }
+
+    .menu_links {
+        flex-direction: column;
+        gap: 10px;
+
+        padding: 10px;
+        position: absolute;
+        height: min-content;
+        top: 0;
+        right: 0;
+        left: 0;
+        transform: translateY(-100%) scale(0);
+        opacity: 0;
+        background-color: #ffffff;
+
+        z-index: -1;
+        transition: transform .15s, opacity .15s;
+    }
+
+    .hamburger_menu_container:has(.menu_toggler:checked)~.menu_links {
+        transform: translateY(30%) scale(100%);
+        opacity: 1;
+        transition: transform .15s, opacity .15s;
+    }
+}
