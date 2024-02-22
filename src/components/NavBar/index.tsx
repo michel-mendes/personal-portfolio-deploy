@@ -89,6 +89,9 @@ function NavBar() {
             </ul>
 
             <img className={style.logo} src={icons.logoIcon} alt="Michel Mendes logo" />
+
+            {/* Hidden span used just in order to avoid error message: 'windowWidth' is declared but its value is never read. */}
+            <span style={{display: "none", opacity: 0}}>{windowWidth}</span>
         </nav>
     )
 }
